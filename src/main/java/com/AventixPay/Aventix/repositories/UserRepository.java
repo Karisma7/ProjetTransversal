@@ -1,8 +1,14 @@
 package com.AventixPay.Aventix.repositories;
 
 
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import com.AventixPay.Aventix.entities.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-@RepositoryRestResource
-public interface UserRepository {
+import java.util.Optional;
+
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
+    Optional<User> findById(Long id);
 }
+

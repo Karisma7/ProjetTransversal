@@ -2,10 +2,9 @@ package com.AventixPay.Aventix.entities;
 
 import com.AventixPay.Aventix.enumClass.Role;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -13,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+//@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +22,9 @@ public class User {
     private String email;
     private String password;
     private String phone;
-    private Double solde;
+    @Setter
+    @Getter
+    private BigDecimal solde;
     private Role role;
 
     @OneToOne(mappedBy = "user")
@@ -51,4 +53,5 @@ public class User {
 
     @OneToMany(mappedBy = "factureRecues")
     private List<Facture> facturesRecues;
+
 }
