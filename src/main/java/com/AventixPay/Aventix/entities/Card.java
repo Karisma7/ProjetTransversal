@@ -1,8 +1,6 @@
 package com.AventixPay.Aventix.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,7 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Entity
 @Table(name = "card")
-// @JsonInclude(JsonInclude.Include.NON_NULL)  // Inclure uniquement les champs non null
+
 public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

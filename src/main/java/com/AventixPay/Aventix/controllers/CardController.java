@@ -2,12 +2,7 @@ package com.AventixPay.Aventix.controllers;
 
 import com.AventixPay.Aventix.entities.Card;
 import com.AventixPay.Aventix.service.CardService;
-import com.AventixPay.Aventix.service.serviceImpl.RFIDServiceImpl;
-import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import com.AventixPay.Aventix.service.RFIDService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +16,6 @@ import java.util.*;
 @RequestMapping("/api/card")
 public class  CardController {
 
-    private static final Logger logger = LoggerFactory.getLogger(CardController.class);
     private final CardService cardService;
     private final RFIDService rfidService;
 
@@ -40,7 +34,6 @@ public class  CardController {
     @GetMapping("/{serialNumber}")
     public ResponseEntity<?> getCardBySerial(@PathVariable String serialNumber) {
         Optional<Card> card = cardService.findBySerialNumber(serialNumber);
-
         if (card.isPresent()) {
             return ResponseEntity.ok(card.get());
         } else {
@@ -61,12 +54,16 @@ public class  CardController {
         return ResponseEntity.ok("Carte supprimée avec succès");
     }
 
+    //Controller test: read serialNumber
+    @GetMapping("/readCard")
+    public ResponseEntity<String> readSerialNumber() {
+        return ResponseEntity.ok(rfidService.readSerialNumberFromRFID());
+    }
+
+    //Controller test : trouver l'entité correspondante à partir du serial number
     @GetMapping("/read")
     public ResponseEntity<?> readCard() {
-
             String uidString = rfidService.readSerialNumberFromRFID();
-            //
-            // logger.info("Carte RFID détectée : {}", uidString);
             // Recherche de la carte en base
             Optional<Card> card = cardService.findBySerialNumber(uidString);
             if (card.isPresent()) {
