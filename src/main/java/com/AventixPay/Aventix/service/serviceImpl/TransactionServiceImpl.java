@@ -26,10 +26,10 @@ public class TransactionServiceImpl implements TransactionService {
         }
     }
     @Override
-    public BigDecimal crediter(BigDecimal commercantsolde, BigDecimal montant) {
+    public BigDecimal crediter(BigDecimal commercantSolde, BigDecimal montant) {
         if (montant.compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("Le montant à créditer doit être supérieur à zéro.");
         }
-        return commercantsolde.add(montant);
+        return commercantSolde.add(montant);
     }
 }

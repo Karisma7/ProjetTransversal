@@ -54,4 +54,8 @@ public class User {
     @OneToMany(mappedBy = "factureRecues")
     private List<Facture> facturesRecues;
 
+
+    public void setSolde(BigDecimal solde) {
+        this.solde = solde;
+    }
 }
