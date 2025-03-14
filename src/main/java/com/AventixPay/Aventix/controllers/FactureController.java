@@ -19,7 +19,8 @@ import java.util.Optional;
 public class FactureController {
     @Autowired
     private FactureService factureService;
-
+    
+    //ajouter une facture
     @PostMapping("/addFacture")
     public ResponseEntity<Facture> addFacture(@RequestBody Facture facture) {
         Facture savedFacture = factureService.saveFacture(facture);

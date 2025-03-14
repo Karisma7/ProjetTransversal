@@ -35,22 +35,28 @@ public class RFIDServiceImpl implements RFIDService {
 
         try {
             // Attente avant de commencer la lecture pour garantir une synchronisation
+            System.out.println("Attente avant de commencer la lecture...");
             try {
                 Thread.sleep(500); // Délai de 500 ms avant de commencer la lecture
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
             // Ignorer les données résiduelles dans le buffer
             ignoreResidualData(serialPort);
-            // Lire les données depuis le port série COM5
+
+            // Lire les données depuis le port série
             byte[] buffer = new byte[BUFFER_SIZE];
             Arrays.fill(buffer, (byte) 0); // Effacez le buffer avant la lecture
 
             int numRead = serialPort.readBytes(buffer, buffer.length);
             if (numRead > 0) {
-                // Recupérer les données lues
+                // Traitez les données lues
                 String uid = bytesToHex(Arrays.copyOf(buffer, numRead));
+
+                // Effacer explicitement le buffer après lecture pour s'assurer qu'il est réinitialisé
                 Arrays.fill(buffer, (byte) 0); // Effacer les données du buffer après chaque lecture
+
                 return uid;
             } else {
                 System.err.println("Aucune donnée reçue du port.");
@@ -81,5 +87,6 @@ public class RFIDServiceImpl implements RFIDService {
         return hexString.toString();
     }
 }
+
 
 

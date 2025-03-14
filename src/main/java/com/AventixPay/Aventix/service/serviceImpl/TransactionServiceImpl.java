@@ -25,6 +25,8 @@ public class TransactionServiceImpl implements TransactionService {
             throw new RuntimeException("Fonds insuffisants !");
         }
     }
+
+    //service de credit du compte 
     @Override
     public BigDecimal crediter(BigDecimal commercantSolde, BigDecimal montant) {
         if (montant.compareTo(BigDecimal.ZERO) <= 0) {

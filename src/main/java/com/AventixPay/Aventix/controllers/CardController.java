@@ -25,12 +25,13 @@ public class  CardController {
         this.cardService = cardService;
     }
 
+    //ajouter un utilisateur
     @PostMapping("/add")
     public ResponseEntity<Card> addCard(@RequestBody Card card) {
         Card savedCard = cardService.saveCard(card);
         return ResponseEntity.ok(savedCard);
     }
-
+    //recherche via le serial number du user
     @GetMapping("/{serialNumber}")
     public ResponseEntity<?> getCardBySerial(@PathVariable String serialNumber) {
         Optional<Card> card = cardService.findBySerialNumber(serialNumber);
@@ -42,12 +43,12 @@ public class  CardController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
         }
     }
-
+    //recherche de toutes les cartes
     @GetMapping("/all")
     public ResponseEntity<List<Card>> getAllCards() {
         return ResponseEntity.ok(cardService.getAllCards());
     }
-
+    //supprimer une carte via son id
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteCard(@PathVariable Long id) {
         cardService.deleteCard(id);

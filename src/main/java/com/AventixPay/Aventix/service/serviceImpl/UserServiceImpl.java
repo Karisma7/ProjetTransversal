@@ -18,7 +18,6 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(id);
     }
 
-
     @Override
     public User saveUser(User user) {
         return userRepository.save(user);
@@ -26,15 +25,13 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public User updateSolde(Long userId, BigDecimal nouveauSolde) {
+    public void updateSolde(Long userId, BigDecimal nouveauSolde) {
         if (nouveauSolde.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException("Le solde ne peut pas être négatif.");
         }
-
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("Utilisateur introuvable"));
-
         user.setSolde(nouveauSolde);
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 }

@@ -6,10 +6,12 @@ import java.math.BigDecimal;
 import java.util.Optional;
 
 public interface UserService {
+    //rechercher un utilisateur
     Optional<User> getUserById(Long id);
-
+    
+    //sauvegarder un utilisateur
     User saveUser(User user);
 
     //Service pour mettre à jour le solde d'un utilisateur
-    User updateSolde(Long userId, BigDecimal nouveauSolde);
+    void updateSolde(Long userId, BigDecimal nouveauSolde);
 }
